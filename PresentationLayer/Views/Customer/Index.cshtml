@@ -1,0 +1,21 @@
+﻿@{
+   var id = ViewBag.Id;
+}
+
+<h1>Index </h1>
+
+<p>
+    <a asp-controller="Customer" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>           
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+<script src="~/js/CustomerStaff.js" asp-append-version="true"></script>

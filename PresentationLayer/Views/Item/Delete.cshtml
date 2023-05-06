@@ -1,0 +1,17 @@
+﻿@{
+    var ID = ViewBag.ID;
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this item?</h3>
+<div>
+
+    <form method="post" id="deleteItemForm">
+        <input type="hidden" name="ItemIdToDelete" id="ItemIdToDelete" value="@ID"/>
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+         <a asp-controller="Item" asp-action="Index">Back to List</a>
+    </form>
+</div>
+
+<script src="~/js/ItemStaff.js" asp-append-version="true"></script>

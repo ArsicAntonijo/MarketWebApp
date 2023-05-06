@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Register</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="createCustomerForm">
+            <div class="form-group">
+                <label class="control-label">Name:</label>
+                <input name="Name" class="form-control" />
+                <span  class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email:</label>
+                <input name="Email" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password:</label>
+                <input type="password" name="Password" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Back to List</a>
+</div>
+
+<script src="~/js/CustomerStaff.js" asp-append-version="true"></script>

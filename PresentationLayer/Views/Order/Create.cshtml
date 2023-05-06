@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Name:</label>
+                <input name="Name" class="form-control" />
+                <span  class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Price:</label>
+                <input name="Price" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">AmauntAvailable:</label>
+                <input name="AmauntAvailable" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">MeasurementUnit:</label>
+                <input name="MeasurementUnit" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">PricePerUnit:</label>
+                <input name="PricePerUnit" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Tax:</label>
+                <input name="Tax" class="form-control" />
+                <span  class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">PriceWithTax:</label>
+                <input name="PriceWithTax" class="form-control" />
+                <span  class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Item" asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,72 @@
+﻿@page
+@model FrontEnd.Pages.Items.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].AmauntAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].MeasurementUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].PricePerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Tax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].PriceWithTax)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Item) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmauntAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasurementUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePerUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceWithTax)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ItemId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ItemId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ItemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
