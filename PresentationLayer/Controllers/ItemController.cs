@@ -10,12 +10,10 @@ namespace PresentationLayer.Controllers
     public class ItemController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private CustomersOrder _customersOrder;
 
-        public ItemController(ILogger<HomeController> logger, CustomersOrder customersOrder)
+        public ItemController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _customersOrder = customersOrder;
         }
         public IActionResult Index()
         {
@@ -102,7 +100,7 @@ namespace PresentationLayer.Controllers
             var co = JsonConvert.DeserializeObject<CustomersOrder>(HttpContext.Session.GetString("order"));
             if (co != null || co.Items.Count > 0)
             {
-                string str = "{\"customer\":{\"id\":" + co.CustomerId + ",\"name\":\"string\",\"email\":\"string\",\"password\":\"string\"},\"orderedItems\":[";
+                string str = "{\"confirmed\":\"false\",\"customer\":{\"id\":" + co.CustomerId + ",\"name\":\"string\",\"email\":\"string\",\"password\":\"string\",\"type\":\"string\"},\"orderedItems\":[";
                 foreach (var item in co.Items)
                 {
                     str += "{\"orderId\":0,\"itemId\":" + item.ItemId + ",\"amaunt\":" + item.Amaunt + "},";

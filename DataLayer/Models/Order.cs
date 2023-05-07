@@ -9,7 +9,7 @@ namespace DataLayer.Models
     public class Order
     {
         public int OrderId { get; set; }
-   //     public string Amaunt { get; set; }
+        public string Confirmed { get; set; }
 
 
         public Customer Customer { get; set; }

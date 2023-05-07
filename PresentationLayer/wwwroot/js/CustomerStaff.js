@@ -2,11 +2,13 @@ var Itemlist;
 var URL = "https://localhost:7122/api/Sales/Customer";
 const createCustomerForm = document.querySelector('#createCustomerForm');
 const deleteCustomerForm = document.querySelector('#deleteCustomerForm');
+const createAdminForm = document.querySelector('#createAdminForm');
 const table = document.querySelector('#tableBody');
 
 window.onload = function () {
     if (table != null) getCustomers();
     if (createCustomerForm != null) createCustomerForm.onsubmit = CreateCustomer;
+    if (createAdminForm != null) createAdminForm.onsubmit = CreateAdmin;
     if (deleteCustomerForm != null) deleteCustomerForm.onsubmit = DeleteCustomer;
     console.log("onload");
 }
@@ -43,7 +45,8 @@ function CreateCustomer(e) {
     var body = {
         "name": createCustomerForm.elements["Name"].value,
         "email": createCustomerForm.elements["Email"].value,
-        "password": createCustomerForm.elements["Password"].value
+        "password": createCustomerForm.elements["Password"].value,
+        "type": ""
     };
 
     console.log(body);
@@ -65,6 +68,39 @@ function CreateCustomer(e) {
         }
     });
 }
+
+function CreateAdmin(e) {
+    console.log("Submited");
+    // stops convetional submit
+    e.preventDefault();
+
+    var body = {
+        "name": createAdminForm.elements["Name"].value,
+        "email": createAdminForm.elements["Email"].value,
+        "password": createAdminForm.elements["Password"].value,
+        "type": createAdminForm.elements["Type"].value
+    };
+
+    console.log(body);
+
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        crossDomain: true,
+        url: URL,
+        type: 'POST',
+        data: JSON.stringify(body),
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
 
 function DeleteCustomer(e) {
     console.log("Deleting ...");
