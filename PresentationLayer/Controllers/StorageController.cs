@@ -10,19 +10,27 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Index()
         {
+            SetTypeBag();
             return View();
         }
 
         public IActionResult Create()
         {
+            SetTypeBag();
             return View();
         }
 
         public IActionResult Details(string stringItems) 
         {
+            SetTypeBag();
             List<ItemDetail> items = helper.ConvertToList(stringItems);
             ViewBag.Items = items;
             return View();
+        }
+
+        private void SetTypeBag()
+        {
+            ViewBag.Type = HttpContext.Session.GetString("type");
         }
     }
 }

@@ -37,7 +37,7 @@ namespace DataLayer.Repositories
                 return string.Empty;
             }
 
-            return "" + customer.Id;
+            return "" + customer.Id + "-" + customer.Type;
         }
 
         public async Task<string> DeleteCustomer(int id) 

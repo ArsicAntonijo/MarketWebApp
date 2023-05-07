@@ -46,7 +46,7 @@ function CreateCustomer(e) {
         "name": createCustomerForm.elements["Name"].value,
         "email": createCustomerForm.elements["Email"].value,
         "password": createCustomerForm.elements["Password"].value,
-        "type": ""
+        "type": "customer"
     };
 
     console.log(body);

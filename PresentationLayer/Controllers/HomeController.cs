@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Http;
 
 namespace PresentationLayer.Controllers
 {
@@ -21,6 +22,7 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Index()
         {
+            SetTypeBag();
             return View();
         }
 
@@ -33,16 +35,19 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Item()
         {
+            SetTypeBag();
             return View();
         }
 
         public IActionResult Register()
         {
+            SetTypeBag();
             return View();
         }
 
         public IActionResult LogIn() 
         {
+            SetTypeBag();
             return View();
         }
 
@@ -50,7 +55,7 @@ namespace PresentationLayer.Controllers
         {
             bool valid = false;
             string result = string.Empty;
-            Regex reg = new Regex("\\\"(?<id>[0-9]+)\\\"");
+            Regex reg = new Regex("\\\"(?<id>[0-9]+)-(?<type>[a-z]*)\\\"");
 
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("https://localhost:7122/api/Sales/Customer/Log");
             httpWebRequest.ContentType = "application/json";
@@ -88,9 +93,10 @@ namespace PresentationLayer.Controllers
             if (valid)
             {
                 string id = reg.Match((string)result).Groups["id"].Value;
+                string type = reg.Match((string)result).Groups["type"].Value;
                 HttpContext.Session.SetString("CustomerId", id);
-                HttpContext.Session.SetString("type", "valid");
-                return RedirectToAction("Index");
+                HttpContext.Session.SetString("type", type);
+                return RedirectToAction("Index", "Item");
             }
             // ViewBag.Id = HttpContext.Session.GetString("id");
             return RedirectToAction("LogIn");
@@ -100,12 +106,17 @@ namespace PresentationLayer.Controllers
         {
             HttpContext.Session.SetString("CustomerId", "");
             HttpContext.Session.SetString("type", "");
-            return Redirect("Item");
+            return RedirectToAction("Index", "Item");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private void SetTypeBag()
+        {
+            ViewBag.Type = HttpContext.Session.GetString("type");
         }
     }
 }

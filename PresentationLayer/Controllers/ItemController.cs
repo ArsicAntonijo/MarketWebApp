@@ -17,25 +17,31 @@ namespace PresentationLayer.Controllers
         }
         public IActionResult Index()
         {
+            SetTypeBag();
             return View();
         }
         public IActionResult Create()
         {
+            SetTypeBag();
             return View();
         }
         public IActionResult Edit(int id)
         {
+            SetTypeBag();
             ViewBag.Id = id;   
             return View();
         }
         public IActionResult Delete(int id)
         {
+            SetTypeBag();
             ViewBag.Id = id;
             return View();
         }
 
         public IActionResult Order(int id, string Name)
         {
+            SetTypeBag();
+            // check here if customer is  logged if not logged display alert
             //if(string.IsNullOrEmpty(HttpContext.Session.GetString("CustomerId")) {
 
             //}
@@ -69,6 +75,7 @@ namespace PresentationLayer.Controllers
 
         public IActionResult ShoppingCart()
         {
+            SetTypeBag();
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("order")))
             {
                 List<OrderedItem> items = new List<OrderedItem>();
@@ -146,6 +153,11 @@ namespace PresentationLayer.Controllers
             }
             
             return RedirectToAction("Index");
+        }
+
+        private void SetTypeBag()
+        {
+            ViewBag.Type = HttpContext.Session.GetString("type");
         }
     }
 }
