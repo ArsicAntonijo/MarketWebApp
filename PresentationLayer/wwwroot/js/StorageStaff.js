@@ -28,7 +28,7 @@ function processData(data) {
             "<td>" + data[i].distributerFirm + "</td>" +
             "<td>" + data[i].dateOfReceipt + "</td>" +
             "<td>" +
-            "<a href='./Storage/Details/" + data[i].stringItems + "'>Details</a>   " +
+            "<a href='./Storage/Details?stringItems=" + data[i].stringItems + "'>Details</a>   " +
             "</td>" +
             "</tr>";
     }
