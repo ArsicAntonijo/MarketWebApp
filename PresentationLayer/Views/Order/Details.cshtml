@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    var id = ViewBag.Id;
+}
+
+<h1>Ordered items</h1>
+
+<input id="index" value="@id" hidden/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Amaunt ordered</th>    
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tableDetails">
+    </tbody>
+</table>
+<div style="align: center">
+    <p>
+     <a asp-controller="Order" asp-action="Index">Go back</a>
+    </p>
+</div>
+
+<script src="~/js/OrderStaff.js" asp-append-version="true"></script>

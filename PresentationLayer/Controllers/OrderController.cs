@@ -32,6 +32,12 @@ namespace PresentationLayer.Controllers
             ViewBag.Id = id;
             return View();
         }
+        public IActionResult Details(int id)
+        {
+            SetTypeBag();
+            ViewBag.Id = id;
+            return View();
+        }
 
         private void SetTypeBag()
         {

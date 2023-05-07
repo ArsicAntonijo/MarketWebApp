@@ -3,10 +3,12 @@ var URL = "https://localhost:7122/api/Sales/Order";
 const createItemForm = document.querySelector('#createItemForm');
 const deleteOrderForm = document.querySelector('#deleteOrderForm');
 const table = document.querySelector('#tableBody');
+const table2 = document.querySelector('#tableDetails');
+const indexP = document.querySelector('#index');
 
 window.onload = function () {
     if (table != null) getOrders();
-   // if (createItemForm != null) createItemForm.onsubmit = CreateItem;
+    if (table2 != null) getOrderItems();
     if (deleteOrderForm != null) deleteOrderForm.onsubmit = DeleteOrder;
     console.log("onload");
 }
@@ -24,9 +26,10 @@ function processData(data) {
     for (var i = 0; i < data.length; i++) {
 
         table.innerHTML += "<tr>" +
+            "<td>" + data[i].confirmed + "</td>" +
             "<td>" + data[i].customer.name + "</td>" +
             "<td>" +
-            "<a href='./Order/Edit/" + data[i].orderId + "'>Edit</a>   " +
+            "<a href='./Order/Details/" + data[i].orderId + "'>Details</a>   " +
             " <a href='./Order/Delete/" + data[i].orderId + "'>Delete</a>" +
             "</td>" +
             "</tr>";
@@ -84,4 +87,20 @@ function DeleteOrder(e) {
     })
         .then((res) => { console.log(res); })
         .catch((error) => { confirm.log(error); });
+}
+
+function getOrderItems() {
+    console.log("We are in details - " + indexP.value);
+    $.getJSON(URL + "/" + indexP.value, function (data) {
+        console.log(data);
+
+        table2.innerHTML = "";
+        for (var i = 0; i < data.orderedItems.length; i++) {
+
+            table2.innerHTML += "<tr>" +
+                "<td>" + data.orderedItems[i].itemId + "</td>" +
+                "<td>" + data.orderedItems[i].amaunt + "</td>" +
+                "</tr>";
+        }
+    });
 }
