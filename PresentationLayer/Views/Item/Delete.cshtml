@@ -1,11 +1,11 @@
 ﻿@{
     var ID = ViewBag.ID;
 }
-
+<div class="cntr">
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this item?</h3>
-<div>
+
 
     <form method="post" id="deleteItemForm">
         <input type="hidden" name="ItemIdToDelete" id="ItemIdToDelete" value="@ID"/>

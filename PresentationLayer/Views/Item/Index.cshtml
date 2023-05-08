@@ -2,26 +2,27 @@
    var id = ViewBag.Id;
 }
 
-<h1>Index @id</h1>
+<div class="cntr">
+    <h1>Available items</h1>
 
-<p>
-    <a asp-controller="Item" asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>          
-            <th>Name</th>
-            <th>Price</th>
-            <th>AmauntAvailable</th>
-            <th>MeasurementUnit</th>
-            <th>PricePerUnit</th>
-            <th>Tax</th>
-            <th>PriceWithTax</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody id="tableBody">
-    </tbody>
-</table>
-
+    <p>
+        <a asp-controller="Item" asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>          
+                <th>Name</th>
+                <th>Price</th>
+                <th>AmauntAvailable</th>
+                <th>MeasurementUnit</th>
+                <th>PricePerUnit</th>
+                <th>Tax</th>
+                <th>PriceWithTax</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+</div>
 <script src="~/js/ItemStaff.js" asp-append-version="true"></script>

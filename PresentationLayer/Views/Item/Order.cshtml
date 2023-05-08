@@ -5,34 +5,38 @@
     var ID = ViewBag.Id;
     var Name = ViewBag.Name;
 }
-<h1>Please choose amaunt and confirm</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" action="NewOrderItem">
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input name="Id" id="Id" class="form-control" value="@ID" hidden/>
-                <span  class="text-danger"></span>
-            </div>  
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input name="Name" id="Name" class="form-control" value="@Name" hidden/>
-                <span  class="text-danger"></span>
-            </div> 
-            <div class="form-group">
-                <label class="control-label">Amaunt:</label>
-                <input type="number" name="Amaunt" id="Amaunt" class="form-control" required/>
-                <span  class="text-danger"></span>
-            </div>     
-            <br />       
-            <div class="form-group">
-                <input type="submit" value="Save Order" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="cntr">
+    <h1>Please choose amaunt and confirm</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form method="post" action="NewOrderItem">
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <input name="Id" id="Id" class="form-control" value="@ID" hidden/>
+                    <span  class="text-danger"></span>
+                </div>  
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <input name="Name" id="Name" class="form-control" value="@Name" hidden/>
+                    <span  class="text-danger"></span>
+                </div> 
+                <div class="form-group">
+                    <label class="control-label">Amaunt:</label>
+                    <input type="number" name="Amaunt" id="Amaunt" class="form-control" required/>
+                    <span  class="text-danger"></span>
+                </div>     
+                <br />       
+                <div class="form-group">
+                    <input type="submit" value="Save Order" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
     </div>
-</div>
-<br />
-<div>
-    <a asp-controller="Item" asp-action="Index">Back to List</a>
+    <br />
+    <div>
+        <a asp-controller="Item" asp-action="Index">Back to List</a>
+    </div>
 </div>

@@ -4,6 +4,7 @@
 @{
     var items = ViewBag.Items;
 }
+<div class="cntr">
 <h1>Shopping cart</h1>
 <hr />
 <table class="table">
@@ -29,7 +30,7 @@
         }
     </tbody>
 </table>
-    <div class="col-md-4">
+    <div>
         <form method="post" action="OrderConfirmed">      
             <div class="form-group">
                 <input type="submit" value="Confirm Order" class="btn btn-primary" />

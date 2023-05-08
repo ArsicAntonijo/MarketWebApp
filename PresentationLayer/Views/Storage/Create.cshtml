@@ -3,10 +3,13 @@
 *@
 @{
 }
-<h1>Create new receipt</h1>
-<hr />
+
 <div class="row">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
+        <br />
+        <h1>Create new receipt</h1>
+        <hr />
         <form method="post" id="createStorageForm">
             <div class="form-group">
                 <label class="control-label">Distributer Name:</label>
@@ -28,14 +31,16 @@
                 <input name="Items" id="Items" class="form-control" required/>
                 <span class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <br />
+            <div class="form-group cntr">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
+    <div class="col-md-4"></div>
 </div>
-
-<div>
+<br />
+<div class="cntr">
     <a asp-controller="Storage" asp-action="Index">Back to List</a>
 </div>
 <script src="~/js/StorageStaff.js" asp-append-version="true"></script>

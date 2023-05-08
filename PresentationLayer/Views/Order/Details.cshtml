@@ -6,26 +6,32 @@
 @{
     var id = ViewBag.Id;
 }
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <br />
+        <h1 class="cntr">Ordered items</h1>
+        <br />
+        <input id="index" value="@id" hidden/>
 
-<h1>Ordered items</h1>
-
-<input id="index" value="@id" hidden/>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product Id</th>
-            <th>Amaunt ordered</th>    
-            <th></th>
-        </tr>
-    </thead>
-    <tbody id="tableDetails">
-    </tbody>
-</table>
-<div style="align: center">
-    <p>
-     <a asp-controller="Order" asp-action="Index">Go back</a>
-    </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Id</th>
+                    <th>Amaunt ordered</th>    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tableDetails">
+            </tbody>
+        </table>
+        <br />
+        <div class="cntr">
+             <a asp-controller="Order" asp-action="Index">Go back</a>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
 </div>
+
 
 <script src="~/js/OrderStaff.js" asp-append-version="true"></script>

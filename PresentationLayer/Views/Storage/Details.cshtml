@@ -4,31 +4,39 @@
 @{
     var items = ViewBag.Items;
 }
-<h1>Recived items</h1>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product Id</th>
-            <th>Amaunt recived</th>    
-            <th>Initial price</th>
-        </tr>
-    </thead>
-    <tbody id="tableDetails">
-    @foreach (var item in items)
-    {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Amaunt</td>
-            <td>@item.Price</td>
-        </tr>
-    }
-    </tbody>
-</table>
-<div style="align: center">
-    <p>
-     <a asp-controller="Storage" asp-action="Index">Go back</a>
-    </p>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <br />
+        <h1>Recived items</h1>
+        <hr />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Id</th>
+                    <th>Amaunt recived</th>    
+                    <th>Initial price</th>
+                </tr>
+            </thead>
+            <tbody id="tableDetails">
+                        @foreach (var item in items)
+                        {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Amaunt</td>
+                        <td>@item.Price</td>
+                    </tr>
+                        }
+            </tbody>
+        </table>
+        <div class="cntr">
+            <p>
+             <a asp-controller="Storage" asp-action="Index">Go back</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
 </div>
+
 

@@ -1,6 +1,6 @@
 ﻿@{
-    var type = (string.IsNullOrEmpty(ViewBag.Type)) ? "" : ViewBag.Type;
-    
+    //   var type = (string.IsNullOrEmpty(ViewBag.Type)) ? "" : ViewBag.Type;
+    var type = "admin";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -45,20 +45,20 @@
                             </li>
                         }
 
-                        <li class="nav-item">
+                        <li class="nav-item" class="toRight">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="ShoppingCart">Shopping cart</a>
                         </li>
                         @if (type == "")
                         {
-                            <li class="nav-item">
+                            <li class="nav-item" class="toRight">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" class="toRight">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogIn">Log in</a>
                             </li>
                         }
                         @if (type != "") {
-                            <li class="nav-item">
+                            <li style="float:right">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogOut">Log out</a>
                             </li>
                         }
