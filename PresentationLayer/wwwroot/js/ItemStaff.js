@@ -1,3 +1,30 @@
+// ************************** signal R ***************************
+// create connection
+var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7122/hubs/itemHub").build();
+
+//connect methods  that hub invokes
+connection.on("updateItemTable2", (value) => {
+    console.log("we got data");
+    console.log(value);
+    processData(value);
+});
+
+// invoke hub methods
+function newWindowLoaded() {
+    connection.send("NewItemCreated2");
+}
+
+//start connection
+
+function fullfiled() {
+    console.log("success");
+    newWindowLoaded();
+}
+function issue() {
+    console.log("error");
+}
+// ****************************** end *****************************
+
 var Itemlist;
 var URL = "https://localhost:7122/api/Sales";
 const createItemForm = document.querySelector('#createItemForm');
@@ -5,9 +32,11 @@ const deleteItemForm = document.querySelector('#deleteItemForm');
 const table = document.querySelector('#tableBody');
 
 window.onload = function () {
-    if (table != null) getCustomers();
+    //if (table != null) getCustomers();
     if (createItemForm != null) createItemForm.onsubmit = CreateItem;
     if (deleteItemForm != null) deleteItemForm.onsubmit = DeleteItem;
+
+    connection.start().then(fullfiled, issue);
     console.log("onload");
 }
 
@@ -93,3 +122,4 @@ function DeleteItem(e) {
         .then((res) => { console.log(res); })
         .catch((error) => { confirm.log(error); });
 }
+

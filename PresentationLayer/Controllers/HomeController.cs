@@ -118,5 +118,47 @@ namespace PresentationLayer.Controllers
         {
             ViewBag.Type = HttpContext.Session.GetString("type");
         }
+
+        public IActionResult Test()
+        {
+            bool valid = false;
+            string result = string.Empty;
+            Regex reg = new Regex("\\\"(?<id>[0-9]+)-(?<type>[a-z]*)\\\"");
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("https://localhost:7122/api/Sales/Customer/Test");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Accept = "application/json";
+            httpWebRequest.Method = "POST";
+            httpWebRequest.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+            StringBuilder sb = new StringBuilder();
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                //Body context 
+                string json = JsonConvert.SerializeObject(new
+                {
+                    email = "asd",
+                    password = "asd"
+                });
+
+                streamWriter.Write(json);
+            }
+
+            try
+            {
+                HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                //add regex here
+                valid = reg.Match(result).Success;
+            }
+            catch (Exception ex)
+            {
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

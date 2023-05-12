@@ -10,6 +10,7 @@ using DataLayer.Models;
 using Service;
 using AutoMapper;
 using DataLayer.Dto;
+using MarketApi.Hubs;
 
 namespace MarketApi.Controllers
 {
@@ -244,5 +245,16 @@ namespace MarketApi.Controllers
             return NoContent();
         }
 
+
+        // testing signal R 
+        // POST: api/Customers/
+        [HttpPost("Customer/Test")]
+        public async Task<IActionResult> TestCustomer(CustomerDto c)
+        {
+            //var customer = await _service.CheckCustomer(c.Email, c.Password);
+            //ItemHub ih = new ItemHub();
+            //await ih.NewItemCreated2();
+            return Ok();
+        }  
     }
 }

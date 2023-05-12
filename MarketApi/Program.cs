@@ -4,6 +4,7 @@ using DataLayer.Data;
 using Service;
 using DataLayer.Repositories;
 using System.Text.Json.Serialization;
+using MarketApi.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MarketApiContext>(options =>
@@ -14,22 +15,24 @@ builder.Services.AddTransient<SalesRepository>();
 builder.Services.AddTransient<StorageService>();
 builder.Services.AddTransient<StorageRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddSignalR();
 // Add services to the container.
 
 
 //enable CORS
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("https://localhost:7048",
-                                              "http://localhost:5155")
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                      });
-});
+//var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy(name: MyAllowSpecificOrigins,
+//                      policy =>
+//                      {
+//                          policy.WithOrigins("https://localhost:7048",
+//                                              "http://localhost:5155")
+//                                .AllowAnyHeader()
+//                                .AllowAnyMethod()
+//                                .AllowAnyOrigin();
+//                      });
+//});
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -50,10 +53,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins);
+//app.UseCors(MyAllowSpecificOrigins);
+
+// global cors policy
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials()); // allow credentials
+
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<ItemHub>("/hubs/itemHub");
 
 app.Run();
