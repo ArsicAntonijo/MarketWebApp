@@ -38,25 +38,34 @@ namespace PresentationLayer.Controllers
             return View();
         }
 
+        // redirecting to view for amaunt selecting
         public IActionResult Order(int id, string Name)
         {
             SetTypeBag();
-            // check here if customer is  logged if not logged display alert
-            //if(string.IsNullOrEmpty(HttpContext.Session.GetString("CustomerId")) {
+            //check here if customer is logged if not logged display alert
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("CustomerId"))) {
+                ViewBag.DoAlert = "true";
+                return RedirectToAction("Index");
+            }
+            else
+            {
 
-            //}
-            ViewBag.Name = Name;
-            ViewBag.Id = id;
-            return View();
+                ViewBag.Name = Name;
+                ViewBag.Id = id;
+                return View();
+            }
+            
         }
 
+        // adding new ordered item in shopping cart
         public IActionResult NewOrderItem(string Id, string Name, string Amaunt)
         {
             CustomersOrder co;
             string? order = HttpContext.Session.GetString("order");
             if (string.IsNullOrEmpty(order))
             {
-                co = new CustomersOrder("1");
+                string idd = HttpContext.Session.GetString("CustomerId");
+                co = new CustomersOrder(idd);
             }
             else
             {
@@ -73,6 +82,7 @@ namespace PresentationLayer.Controllers
             return RedirectToAction("Index");
         }
 
+        // displaying shopping cart items
         public IActionResult ShoppingCart()
         {
             SetTypeBag();
@@ -89,6 +99,7 @@ namespace PresentationLayer.Controllers
             return View();
         }
 
+        //  removing item from shopping cart
         public IActionResult DeleteFromCart(string id)
         {
             var co = JsonConvert.DeserializeObject<CustomersOrder>(HttpContext.Session.GetString("order"));

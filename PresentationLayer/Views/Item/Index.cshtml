@@ -1,6 +1,13 @@
 ﻿@{
-   var id = ViewBag.Id;
+    var id = ViewBag.Id;
+    var doAlert = (string.IsNullOrEmpty(ViewBag.DoAlert)) ? "false" : "true";
 }
+
+@if (doAlert.Equals("true"))
+{
+            <script> alert("Log in to oreder!");</script>
+}
+
 
 <div class="cntr">
     <h1>Available items</h1>
