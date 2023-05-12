@@ -1,4 +1,5 @@
 ﻿using DataLayer.Data;
+using DataLayer.Dto;
 using DataLayer.Models;
 using DataLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -90,12 +91,24 @@ namespace Service
 
         public async Task<string> PostOrder(Order i)
         {
-            return await _repo.PostOrder(i);
+            // here item decement to be added
+            ICollection<OrderedItem> list = i.OrderedItems;
+            await _repo.PostOrder(i);
+            _repo.UpdateItems(list);
+            return string.Empty;
+        }
+
+        public async Task<string> PutOrder(OrderDto od)
+        {
+            return await _repo.UpdateOrder(od);
         }
 
         public async Task<string> DeleteOrder(int id)
         {
-            return await _repo.DeleteOrder(id);
+            // here to increment item
+            _repo.OrderCancelled(id);
+            await _repo.DeleteOrder(id);            
+            return string.Empty;
         }
     }
 }

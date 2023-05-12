@@ -1,4 +1,5 @@
 ﻿using DataLayer.Data;
+using DataLayer.Dto;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -173,5 +174,62 @@ namespace DataLayer.Repositories
 
             return string.Empty;
         }
-    }
+
+        public async Task<string> UpdateOrder(OrderDto orderDto)
+        {
+            Order o = _context.Order.Where(or => or.OrderId  == orderDto.OrderId).FirstOrDefault();
+
+            if (o != null)
+            {
+                o.Confirmed = orderDto.Confirmed;
+
+                _context.Entry(o).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return string.Empty;
+            }
+            else
+            {
+                return "Not found";
+            }
+        }
+
+        public async void UpdateItems(ICollection<OrderedItem>? list)
+        {
+            foreach(var i in list)
+            {
+                Item item = _context.Item.Where(it => it.ItemId == i.ItemId).FirstOrDefault();
+                if (item != null)
+                {
+                    decimal newAmaunt = item.AmauntAvailable - i.Amaunt;
+                    item.AmauntAvailable = newAmaunt;
+                    _context.Entry(item).State = EntityState.Modified;
+                }
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async void OrderCancelled(int id)
+        {
+            Order o = _context.Order.Include(oo => oo.OrderedItems).Where(oo => oo.OrderId == id).FirstOrDefault();
+            if (o != null)
+            {
+                foreach(var oi in o.OrderedItems)
+                {
+                    Item item = _context.Item.Where(it => it.ItemId == oi.ItemId).FirstOrDefault();
+                    if (item != null)
+                    {
+                        decimal newAmaunt = item.AmauntAvailable + oi.Amaunt;
+                        item.AmauntAvailable = newAmaunt;
+                        _context.Entry(item).State = EntityState.Modified;
+                    }
+                }
+                await _context.SaveChangesAsync();  
+            }
+        }
+
+        public async void NewItemsRecieved(List<OrderedItem> orderedItems)
+        {
+           
+        }
+    }    
 }

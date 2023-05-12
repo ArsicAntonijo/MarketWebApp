@@ -31,6 +31,7 @@ function processData(data) {
             "<td>" +
             "<a href='./Order/Details/" + data[i].orderId + "'>Details</a>   " +
             " <a href='./Order/Delete/" + data[i].orderId + "'>Delete</a>" +
+            " <a href='./Order/ConfirmOrder/" + data[i].orderId + "'>Confirm</a>" +
             "</td>" +
             "</tr>";
     }

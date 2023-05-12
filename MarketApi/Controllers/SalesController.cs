@@ -214,6 +214,23 @@ namespace MarketApi.Controllers
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
 
+        // PUT: api/Orders
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("Order")]
+        public async Task<IActionResult> PutOrder(OrderDto order)
+        {
+            string s = await _service.PutOrder(order);
+
+            if (!s.Equals(""))
+            {
+                return BadRequest(order.OrderId);
+            }
+            else
+            {
+                return Ok();
+            }
+        }
+
         // DELETE: api/Orders/5
         [HttpDelete("Order/{id}")]
         public async Task<IActionResult> DeleteOrder(int id)

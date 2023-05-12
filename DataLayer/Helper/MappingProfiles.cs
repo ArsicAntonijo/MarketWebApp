@@ -17,6 +17,8 @@ namespace DataLayer.Helper
             CreateMap<ItemDto, Item>();
             CreateMap<Receipt, ReceiptDto>();
             CreateMap<ReceiptDto, Receipt>();
+            CreateMap<Order, OrderDto>();
+            CreateMap<OrderDto, Order>();
         }
     }
 }
